@@ -1,6 +1,11 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Divider } from 'react-native-elements/dist/divider/Divider'
+
+const iconsArray=[require('../../assets/heart-icon.png'),
+require('../../assets/comment.png'),
+require('../../assets/share.png'),
+require('../../assets/save.png')];
 
 export default function Post({post}) {
   return (
@@ -8,6 +13,10 @@ export default function Post({post}) {
         <Divider width={1} orientation='vertical'/>
         <PostHeader post={post}/>
         <PostImage post={post}/>
+        <View style={{marginHorizontal:15,marginTop:10}}>
+        <PostFooter post={post}/>
+        <Likes post={post}/>
+        </View>
     </View>
   )
 }
@@ -27,6 +36,33 @@ const PostImage=({post})=>(
   <Image source={{uri:post.imageUrl}}
   style={{height:'100%',resizeMode:'cover'}}
   />
+  </View>
+)
+
+const PostFooter=({post})=>(
+  <View style={{flexDirection:'row'}}>
+    <View style={footer.leftIconsContainer}>
+      <Icon imgStyle={footer.footerIcons} path={iconsArray[0]}/>
+      <Icon imgStyle={footer.footerIcons} path={iconsArray[1]}/>
+      <Icon imgStyle={footer.footerIcons} path={iconsArray[2]}/>
+    </View>
+    <View style={{flex:1,alignItems:'flex-end'}}>
+      <Icon imgStyle={footer.footerIcons} path={iconsArray[3]}/>
+    </View>
+  </View>
+)
+
+/* NOTE Inherit 2 different styles like this: style={[styles.style1,styles.style2]} */
+
+const Icon=({imgStyle,path})=>(
+  <TouchableOpacity>
+    <Image style={imgStyle} source={path}/>
+  </TouchableOpacity>
+)
+
+const Likes=({post})=>(
+  <View style={{flexDirection:'row',marginTop:5}}>
+  <Text style={{color:'white'}}>{post.likes.toLocaleString('en')} Likes</Text>
   </View>
 )
 
@@ -56,5 +92,17 @@ const postHeader = StyleSheet.create({
   threeDots:{
     color:'white',
     fontWeight:'900'
+  }
+})
+
+const footer = StyleSheet.create({
+  footerIcons:{
+    width:33,
+    height:33
+  },
+  leftIconsContainer:{
+    flexDirection:'row',
+    width:'32%',
+    justifyContent:'space-between'
   }
 })
