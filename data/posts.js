@@ -63,5 +63,12 @@ export const posts=[
                 comment:"Isn’t crypto decentralized, the only case they can do that is on centralized exchanges"
             }
         ]
+    },
+    {
+        imageUrl:'https://pbs.twimg.com/media/FRWKPY0WQAIawlP?format=png&name=large',
+        user:users[0],
+        likes:55,
+        caption:'The best investment you can make, is in yourself. Your time, money and energy should be spent on yourself. Because you are the most important person to yourself. The only one who you can always rely on ❤️.',
+        comments:[]
     }
 ]

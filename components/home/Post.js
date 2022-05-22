@@ -16,6 +16,9 @@ export default function Post({post}) {
         <View style={{marginHorizontal:15,marginTop:10}}>
         <PostFooter post={post}/>
         <Likes post={post}/>
+        <Caption post={post}/>
+        <CommentSection post={post}/>
+        <Comments post={post}/>
         </View>
     </View>
   )
@@ -64,6 +67,43 @@ const Likes=({post})=>(
   <View style={{flexDirection:'row',marginTop:5}}>
   <Text style={{color:'white'}}>{post.likes.toLocaleString('en')} Likes</Text>
   </View>
+)
+
+const Caption=({post})=>(
+  <View style={{marginTop:5}}>
+    <Text style={{color:'white'}}>
+      <Text style={{fontWeight:'700'}}>{post.user.user}</Text>
+      <Text>  {post.caption}</Text>
+    </Text>
+  </View>
+)
+
+const CommentSection=({post})=>(
+  <View style={{marginTop:5}}>
+    {!!post.comments.length && (
+    <Text style={{color:'gray'}}>
+      View{post.comments.length>1?' all ':''}
+      {post.comments.length>1? post.comments.length:''}
+      {post.comments.length>1?' comments':' comment'}
+    </Text>
+    )}
+  </View>
+)
+
+/* NOTE: using '!!' allows me to turn array's length into a true (for 1+) or false (for 0)*/
+/* This way whatever is after '&&' will not be rendered if the array's length is false */
+
+const Comments=({post})=>(
+  <>
+    {post.comments.map((comment,index)=>(
+      <View key={index}>
+        <Text>
+          <Text style={{color:'white',fontWeight:'700'}}>{comment.user}</Text>
+          <Text style={{color:'white'}}>  {comment.comment}</Text>
+        </Text>
+      </View>
+    ))}
+  </>
 )
 
 const postHeader = StyleSheet.create({
