@@ -4,6 +4,7 @@ import Header from '../components/home/Header'
 import Stories from '../components/home/Stories'
 import Post from '../components/home/Post'
 import {posts} from '../data/posts'
+import BottomTabs, { BottomTabIcons } from '../components/home/BottomTabs'
 
 export default function HomeScreen() {
   return (
@@ -15,6 +16,7 @@ export default function HomeScreen() {
           <Post post={post} key={index}/>
         ))}
       </ScrollView>
+      <BottomTabs icons={BottomTabIcons}/>
     </SafeAreaView>
   )
 }
@@ -24,5 +26,6 @@ const styles = StyleSheet.create({
         backgroundColor:'#151414',
         width:'100%',
         flex:1,
+        paddingBottom:50
     }
 })
