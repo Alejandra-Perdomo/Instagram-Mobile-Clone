@@ -47,6 +47,7 @@ export default function BottomTabs({icons}) {
     <Divider width={1} orientation='vertical'/>
     <View style={styles.container}>
       {icons.map((icon,index)=>(
+        
         <Icon icon={icon} key={index} />
       ))}
     </View>
