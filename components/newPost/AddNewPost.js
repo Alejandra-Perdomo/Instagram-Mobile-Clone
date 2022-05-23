@@ -3,19 +3,19 @@ import React from 'react'
 import FormikPostUploader from './FormikPostUploader'
 
 
-export default function AddNewPost() {
+export default function AddNewPost({navigation}) {
 
   return (
     <View style={styles.container}>
-        <Header/>
+        <Header navigation={navigation}/>
         <FormikPostUploader/>
     </View>
   )
 }
 
-const Header=()=>(
+const Header=({navigation})=>(
     <View style={styles.headerContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>navigation.push('HomeScreen')}>
             <Image source={require('../../assets/LeftArrow.png')}
             style={{width:30,height:30}}/>
         </TouchableOpacity>
@@ -27,6 +27,7 @@ const Header=()=>(
 const styles = StyleSheet.create({
     container:{
         marginHorizontal:10,
+        marginTop:22
     },
     headerContainer:{
         flexDirection:'row',

@@ -51,7 +51,7 @@ export default function FormikPostUploader() {
                 value={values.caption}
             />
             </View>
-            <Button onPress={handleSubmit} title='Share' disabled={!isValid} style={styles.submitBtn}/>
+            <Button onPress={handleSubmit} title='Share' disabled={!isValid}/>
         </View>
      }   
     </Formik>
@@ -72,8 +72,5 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'flex-start',
         margin:10,
-    },
-    submitBtn:{
-        
     }
 })
