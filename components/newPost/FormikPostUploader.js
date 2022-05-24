@@ -3,6 +3,7 @@ import React,{useState} from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Divider } from 'react-native-elements';
+import validURL from 'valid-url';
 const PLACEHOLDER_IMG = "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png";
 
 
@@ -11,21 +12,25 @@ const uploadPostScheema=Yup.object().shape({
     caption:Yup.string().max(2200,'Caption has reached the character limit.'),
 })
 
-export default function FormikPostUploader() {
+export default function FormikPostUploader({navigation}) {
 
     const [imageURL, setImageURL] = useState(PLACEHOLDER_IMG);
 
   return (
     <Formik
     initialValues={{imageUrl:'',caption:''}}
-    onSubmit={(values)=>console.log(values)}
+    onSubmit={(values)=>{
+        console.log(values)
+        console.log('Post submitted successfully')
+        navigation.goBack()
+    }}
     validationSchema={uploadPostScheema}
     validateOnMount={true}
     >
      {({handleBlur,handleChange,handleSubmit,values,errors,isValid})=>
         <View>
             <View style={styles.ImgCaptionContainer}>
-                <Image style={styles.formImage} source={{uri:imageURL?imageURL:PLACEHOLDER_IMG}}/>
+                <Image style={styles.formImage} source={{uri:validURL.isUri(imageURL)?imageURL:PLACEHOLDER_IMG}}/>
                 <View style={{flex:1}}>
                 <TextInput style={styles.formInput} 
                 onChange={e=>setImageURL(e.nativeEvent.text)}
