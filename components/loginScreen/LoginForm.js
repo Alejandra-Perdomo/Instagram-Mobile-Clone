@@ -1,9 +1,11 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Alert } from 'react-native'
 import React, {useState} from 'react'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
+import firebase from '../../firebase'
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 
 export default function LoginForm({navigation}) {
@@ -13,11 +15,51 @@ export default function LoginForm({navigation}) {
         password:Yup.string().required().min(6,'Your password must have at least 6 characters')
     })
 
+    const onlogin = async(email,password)=>{
+        
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+        .then(() => {    
+            console.log('signed in!');
+        })
+        .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert('My Lord!',
+            errorMessage+' What would you like to do next?',
+            [
+                {
+                    text:'OK',
+                    onPress: ()=>console.log('OK'),
+                    style:'cancel'
+                },
+                {
+                    text:'Sing Up',
+                    onPress: ()=> navigation.push('SignupScreen')
+                }
+            ]
+            )
+        });
+    }
+
+    const onsignup = async(email,password) =>{
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log('Account created succesfully!');
+        })
+        .catch((error) => {
+            const errorMessage = error.message;
+            Alert.alert('My Lord!',errorMessage);
+        });
+    }
+
   return (
     <View style={styles.wrapper}>
         <Formik
         initialValues={{email:'',password:''}}
-        onSubmit={(values)=>console.log(values)}
+        onSubmit={(values)=>onlogin(values.email,values.password)}
         validationSchema={loginFormScheema}
         validateOnMount={true}
         >
