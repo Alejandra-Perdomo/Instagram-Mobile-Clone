@@ -1,9 +1,10 @@
-import { View, Text,StyleSheet } from "react-native";
-import NavigationRoutes from "./navigationRoutes";
 
-export default function App() {
+import AuthNavigation from "./AuthNavigation";
+
+export default function App(){
+
   return (
-      <NavigationRoutes/>
+      <AuthNavigation/>
   );
 }
 

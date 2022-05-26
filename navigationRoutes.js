@@ -13,7 +13,7 @@ const screenOptions = {
     headerShown:false,
 }
 
-export default function NavigationRoutes() {
+/* export default function NavigationRoutes() {
   return (
     <NavigationContainer>
         <Stack.Navigator initialRouteName='LoginScreen' screenOptions={screenOptions}>
@@ -24,6 +24,30 @@ export default function NavigationRoutes() {
         </Stack.Navigator>
     </NavigationContainer>
   )
+} */
+
+
+export function SignedInStack() {
+  return (
+    <NavigationContainer>
+        <Stack.Navigator initialRouteName='LoginScreen' screenOptions={screenOptions}>
+            <Stack.Screen name='HomeScreen' component={HomeScreen}/>
+            <Stack.Screen name='NewPostScreen' component={NewPostScreen}/>
+        </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
-const styles = StyleSheet.create({})
+export function SignedOutStack() {
+  return (
+    <NavigationContainer>
+        <Stack.Navigator initialRouteName='LoginScreen' screenOptions={screenOptions}>
+            <Stack.Screen name='LoginScreen' component={LoginScreen}/>
+            <Stack.Screen name='SignupScreen' component={SignupScreen}/>
+        </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
+
+
+

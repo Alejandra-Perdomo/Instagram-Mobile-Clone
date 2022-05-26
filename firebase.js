@@ -3,7 +3,7 @@
 import { getFirestore,firestore } from 'firebase/firestore'; */
 
 import {initializeApp} from 'firebase/app';
-import {getAuth} from 'firebase/auth';
+import {getAuth,onAuthStateChanged,signOut} from 'firebase/auth';
 import {initializeFirestore} from 'firebase/firestore';
 
 
@@ -26,4 +26,4 @@ const db = initializeFirestore(app, {
   experimentalForceLongPolling: true,
 });
 
-export {auth, db};
+export {auth, db, onAuthStateChanged, signOut};

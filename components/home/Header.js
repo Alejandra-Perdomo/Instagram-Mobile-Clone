@@ -1,10 +1,22 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { auth, signOut } from '../../firebase'
 
 export default function Header({navigation}) {
+
+    const signOutHandler = async() =>{
+     await signOut(auth).then(() => {
+            // Sign-out successful.
+            //console.log('Sign-out successful');
+          }).catch((error) => {
+            // An error happened.
+            console.log(error);
+          });
+    }
+
   return (
     <View style={styles.container}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>signOutHandler()}>
         <Image style={styles.logo} source={require('../../assets/insta-logo.png')}/>
         </TouchableOpacity>
         <View style={styles.iconsContainer}>

@@ -4,7 +4,7 @@ import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import {auth,db} from '../../firebase'
 
 export default function SignupForm({navigation}) {
