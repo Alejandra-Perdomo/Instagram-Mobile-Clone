@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import Validator from 'email-validator'
 
 
-export default function LoginForm() {
+export default function LoginForm({navigation}) {
 
     const loginFormScheema = Yup.object().shape({
         email:Yup.string().email().required('An email is required'),
@@ -63,7 +63,7 @@ export default function LoginForm() {
             </Pressable>
             <View style={styles.signupContainer}>
                     <Text>Don't have an account?</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigation.push('SignupScreen')}>
                         <Text style={{color:'#6BB0F5'}}> Sing Up</Text>
                     </TouchableOpacity>
             </View>
