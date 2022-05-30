@@ -1,7 +1,7 @@
 import { users } from "./users"
 export const posts=[
     {
-        imageUrl:'https://scontent.fsap9-1.fna.fbcdn.net/v/t39.30808-6/273762314_489498142530768_4109661712658876568_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=k0SXmrATu5AAX8bDFLw&_nc_ht=scontent.fsap9-1.fna&oh=00_AT8i545nriJ4toQxJiXC2G5b9e5I3z4ng_7QipRhooNjdA&oe=620D69EF',
+        imageUrl:'https://lastfm.freetls.fastly.net/i/u/770x0/47cc5c8229706d68b1cba77a4b77b6e1.jpg',
         user:users[3],
         likes:1233,
         caption:'Ninja Turtles🐢🐢',
@@ -21,7 +21,7 @@ export const posts=[
         ]
     },
     {
-        imageUrl:'https://scontent.fsap9-1.fna.fbcdn.net/v/t1.6435-9/144583984_3463258077129315_7669813250999303737_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=PQj3pZyMWjcAX8AHqiz&_nc_ht=scontent.fsap9-1.fna&oh=00_AT-9G0VGSlD6u7Tc6LwdW3iE-W_kNao4KUggb8Lg0qKaZQ&oe=622D17E3',
+        imageUrl:'https://www.orbcfamily.org/site/wp-content/uploads/2019/04/Depositphotos_225669932_s-2019.jpg',
         user:users[4],
         likes:14,
         caption:'Jesucristo es el SEÑOR! 🔥🔥🔥🔥🔥',
@@ -33,7 +33,7 @@ export const posts=[
         ]
     },
     {
-        imageUrl:'https://scontent.fsap9-1.fna.fbcdn.net/v/t39.30808-6/263738779_1306618786472675_7490816667181208262_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=EaI5d6Sa09oAX9tTsET&_nc_ht=scontent.fsap9-1.fna&oh=00_AT8RacMWjYY3VnsXCl1RggptpYC76YVVLO-xf1vJA_hYgw&oe=620C97BB',
+        imageUrl:'https://forbesbooks.com/wp-content/uploads/2020/07/bigstock-Full-Frame-Shot-Of-Floating-Al-309725560.jpg',
         user:users[0],
         likes:23,
         caption:"There's no time to kill today!",

@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { Button, Divider } from 'react-native-elements';
 import validURL from 'valid-url';
 import {db, auth} from '../../firebase'
-import {collection, query, where, getDocs, updateDoc, doc, documentId, setDoc } from "firebase/firestore";
+import {collection, query, where, getDocs, doc, setDoc} from "firebase/firestore";
 const PLACEHOLDER_IMG = "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png";
 
 
@@ -30,13 +30,14 @@ export default function FormikPostUploader({navigation}) {
                 docId:doc.id
             });
         });
-        
+        console.log('hello')
     }
 
     useEffect(()=>{
         getUser();
     },[])
 
+    /* createdAt:new Date(Date.now()).toString(), */
     const uploadPostToFirebase = async(imageUrl,caption) =>{
         const docId = loggedinUser.docId;
         const docRef = doc(collection(db, "users",docId,"posts"));
@@ -46,6 +47,7 @@ export default function FormikPostUploader({navigation}) {
             profile_picture:loggedinUser.profilePicture,
             owner_uid:auth.currentUser.uid,
             caption:caption,
+            createdAt:new Date(Date.now()).toString(),
             Likes:0,
             likes_by_users:[],
             comments:[]
