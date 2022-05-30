@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TextInput, Pressable, TouchableOpacity, Alert } from 'react-native'
-import { collection, doc, setDoc} from "firebase/firestore";
+import { collection, doc, setDoc,} from "firebase/firestore";
 import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
@@ -25,13 +25,14 @@ export default function SignupForm({navigation}) {
       /* const auth = getAuth(); */
       createUserWithEmailAndPassword(auth, email, password, username)
       .then(async(userCredential) => {
-
+        /* .doc(authUser.user.email) */
         const newUser = doc(collection(db, "users"));
         await setDoc(newUser, 
-            {owner_uid: userCredential.user.uid,
+            {
+            uid:userCredential.user.email,
             username:username,
             email: userCredential.user.email,
-            profile_picture: await getRandomProfilePic()
+            profile_picture: await getRandomProfilePic(),
           });
           console.log('added to db');
 

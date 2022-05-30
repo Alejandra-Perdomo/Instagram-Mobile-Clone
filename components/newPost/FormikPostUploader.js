@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View, Image, TextInput } from 'react-native'
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Divider } from 'react-native-elements';
 import validURL from 'valid-url';
+import {db, auth} from '../../firebase'
+import {collection, query, where, getDocs, updateDoc, doc, documentId, setDoc } from "firebase/firestore";
 const PLACEHOLDER_IMG = "https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png";
 
 
@@ -15,13 +17,48 @@ const uploadPostScheema=Yup.object().shape({
 export default function FormikPostUploader({navigation}) {
 
     const [imageURL, setImageURL] = useState(PLACEHOLDER_IMG);
+    const [loggedinUser,setLoggedinUser] = useState(null);
+
+    const getUser=async()=>{
+        const user = auth.currentUser;
+        const q = query(collection(db, "users"), where("owner_uid", "==", user.uid));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            setLoggedinUser({
+                username:doc.data().username,
+                profilePicture:doc.data().profile_picture,
+                docId:doc.id
+            });
+        });
+        
+    }
+
+    useEffect(()=>{
+        getUser();
+    },[])
+
+    const uploadPostToFirebase = async(imageUrl,caption) =>{
+        const docId = loggedinUser.docId;
+        const docRef = doc(collection(db, "users",docId,"posts"));
+        const data={
+            imageUrl:imageUrl,
+            user:loggedinUser.username,
+            profile_picture:loggedinUser.profilePicture,
+            owner_uid:auth.currentUser.uid,
+            caption:caption,
+            Likes:0,
+            likes_by_users:[],
+            comments:[]
+        }
+        await setDoc(docRef, data);
+        console.log('uploaded');
+    }
 
   return (
     <Formik
     initialValues={{imageUrl:'',caption:''}}
     onSubmit={(values)=>{
-        console.log(values)
-        console.log('Post submitted successfully')
+        uploadPostToFirebase(values.imageUrl,values.caption)
         navigation.goBack()
     }}
     validationSchema={uploadPostScheema}
