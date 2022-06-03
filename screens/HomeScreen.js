@@ -1,22 +1,31 @@
 import { StyleSheet,SafeAreaView, ScrollView } from 'react-native'
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import Header from '../components/home/Header'
 import Stories from '../components/home/Stories'
 import Post from '../components/home/Post'
-import {posts} from '../data/posts'
+/* import {posts} from '../data/posts' */
 import BottomTabs, { BottomTabIcons } from '../components/home/BottomTabs'
 import {db} from '../firebase'
 import {getDocs, collectionGroup} from "firebase/firestore";
 
 export default function HomeScreen({navigation}) {
 
- /*  useEffect(async()=>{
-    const querySnapshot = await getDocs(collectionGroup(db, "posts"));
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data());
-    });
+  const [posts, setPosts] = useState([]);
+  const [postID, setPostID] = useState([])
 
-  },[]) */
+  const loadPosts = async() =>{
+    let postsList=[];
+    let postsIdsLists=[];
+    const querySnapshot = await getDocs(collectionGroup(db, "posts"));
+    querySnapshot.forEach(doc => postsList.push(doc.data()))
+    querySnapshot.forEach(doc => postsIdsLists.push(doc.id))
+    setPosts(postsList);
+    setPostID(postsIdsLists);
+  }
+
+  useEffect(()=>{
+    loadPosts();
+  },[])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -24,7 +33,7 @@ export default function HomeScreen({navigation}) {
       <Stories/>
       <ScrollView>
         {posts.map((post,index)=>(
-          <Post post={post} key={index}/>
+          <Post post={post} key={index} postID={postID[index]} loadPosts={loadPosts}/>
         ))}
       </ScrollView>
       <BottomTabs icons={BottomTabIcons}/>

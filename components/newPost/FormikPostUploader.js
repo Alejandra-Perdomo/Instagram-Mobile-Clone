@@ -29,8 +29,9 @@ export default function FormikPostUploader({navigation}) {
                 profilePicture:doc.data().profile_picture,
                 docId:doc.id
             });
+            
         });
-        console.log('hello')
+        
     }
 
     useEffect(()=>{
@@ -46,9 +47,9 @@ export default function FormikPostUploader({navigation}) {
             user:loggedinUser.username,
             profile_picture:loggedinUser.profilePicture,
             owner_uid:auth.currentUser.uid,
+            owner_docId:loggedinUser.docId,
             caption:caption,
             createdAt:new Date(Date.now()).toString(),
-            Likes:0,
             likes_by_users:[],
             comments:[]
         }

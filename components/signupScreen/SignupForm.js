@@ -5,7 +5,8 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {auth,db} from '../../firebase'
+import {auth,db} from '../../firebase';
+const defaultUserPic = "https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png";
 
 export default function SignupForm({navigation}) {
 
@@ -29,10 +30,10 @@ export default function SignupForm({navigation}) {
         const newUser = doc(collection(db, "users"));
         await setDoc(newUser, 
             {
-            uid:userCredential.user.email,
+            owner_uid:userCredential.user.uid,
             username:username,
             email: userCredential.user.email,
-            profile_picture: await getRandomProfilePic(),
+            profile_picture: defaultUserPic,
           });
           console.log('added to db');
 
